@@ -1,8 +1,9 @@
-package com.amozh.item;
+package com.amozh.item.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

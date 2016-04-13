@@ -1,4 +1,4 @@
-package com.amozh.item;
+package com.amozh.item.model;
 
 import com.amozh.category.Category;
 import lombok.Data;

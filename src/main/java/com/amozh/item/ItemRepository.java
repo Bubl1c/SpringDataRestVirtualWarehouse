@@ -1,6 +1,6 @@
 package com.amozh.item;
 
-import com.amozh.item.Item;
+import com.amozh.item.model.Item;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;

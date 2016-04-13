@@ -1,5 +1,6 @@
 package com.amozh.storage;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,5 +24,6 @@ public class Storage {
     private String address;
 
     @OneToMany(mappedBy = "storage")
+    @JsonManagedReference
     private List<StorageItem> items;
 }

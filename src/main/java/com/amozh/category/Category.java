@@ -1,6 +1,7 @@
 package com.amozh.category;
 
-import com.amozh.item.Item;
+import com.amozh.item.model.Item;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.Where;
 
@@ -55,6 +56,7 @@ public class Category {
     @OneToMany(mappedBy = "category")
     @OrderBy(value = "position DESC")
     @Where(clause = "deleted = 0")
+    @JsonManagedReference
     private List<Item> items;
 
 }

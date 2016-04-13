@@ -1,4 +1,4 @@
-package com.amozh.operation;
+package com.amozh.operation.model;
 
 /**
  * Created by Andrii Mozharovskyi on 06.04.2016.

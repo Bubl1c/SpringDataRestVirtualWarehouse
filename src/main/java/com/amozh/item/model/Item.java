@@ -1,7 +1,9 @@
-package com.amozh.item;
+package com.amozh.item.model;
 
 import com.amozh.storage.StorageItem;
 import com.amozh.category.Category;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.hibernate.annotations.DiscriminatorOptions;
 
@@ -23,6 +25,7 @@ public abstract class Item {
     @GeneratedValue
     private long id;
 
+
     protected String name;
 
     protected String description;
@@ -34,8 +37,12 @@ public abstract class Item {
 
     @ManyToOne
     @JoinColumn(name = "category_id")
+    @JsonBackReference
     private Category category;
 
     @OneToMany(mappedBy = "item")
+    @JsonManagedReference
     private List<StorageItem> storageItems;
+
+    public interface TestJsonView {}
 }

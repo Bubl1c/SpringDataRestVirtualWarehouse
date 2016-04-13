@@ -1,12 +1,28 @@
 package com.amozh.operation;
 
-import com.amozh.operation.StockOperation;
-import org.springframework.data.repository.CrudRepository;
+import com.amozh.Api;
+import com.amozh.operation.model.StockOperation;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
+
+import java.util.List;
 
 /**
  * Created by Andrii Mozharovskyi on 07.04.2016.
  */
-@RepositoryRestResource(path = "stock")
-public interface StockOperationRepository extends CrudRepository<StockOperation, String> {
-}
+@RepositoryRestResource(path = Api.RES_STOCK_OPERATIONS)
+public interface StockOperationRepository extends PagingAndSortingRepository<StockOperation, String> {
+    @Override
+    @RestResource(exported = false)
+    <S extends StockOperation> S save(S entity);
+
+    @Override
+    @RestResource(exported = false)
+    <S extends StockOperation> Iterable<S> save(Iterable<S> entities);
+
+//    @RestResource(rel = "list", path = "list")
+    @Query(value = "SELECT s FROM StockOperation s")
+    List<StockOperation> findAllInSingleList();
+ }

@@ -1,7 +1,8 @@
-package com.amozh.operation;
+package com.amozh.operation.model;
 
-import com.amozh.item.Item;
-import com.amozh.operation.StockOperation;
+import com.amozh.item.model.Item;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,6 +28,7 @@ public class StockOperationItem {
     @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "operation_id", columnDefinition="uniqueidentifier")
     @JoinColumn(name = "operation_id")
+    @JsonBackReference
     private StockOperation operation;
 
     @ManyToOne
@@ -35,8 +37,11 @@ public class StockOperationItem {
 
     private BigDecimal amount;
 
+    @JsonView(OperationsList.class)
     private BigDecimal price;
 
     private BigDecimal amountAfter;
+
+    public interface OperationsList {}
 
 }

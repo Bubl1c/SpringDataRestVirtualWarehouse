@@ -1,6 +1,7 @@
 package com.amozh.category;
 
 import com.amozh.Api;
+import com.amozh.category.dto.CategoryTreeDTO;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import java.util.Map;
  * Created by Andrii Mozharovskyi on 11.04.2016.
  */
 @RepositoryRestController
-@RequestMapping(Api.CONTEXT + "/categories")
+@RequestMapping(Api.CONTEXT + "/" + Api.RES_CATEGORIES)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CategoryController {
 
@@ -26,7 +27,7 @@ public class CategoryController {
 
     @RequestMapping(value = "/ingredients_tree", method = RequestMethod.GET)
     @ResponseBody
-    public Resource<Map<Long, CategoryService.CategoryTreeDTO>> getTree(
+    public Resource<Map<Long, CategoryTreeDTO>> getTree(
             @RequestParam(value = "storage_id", required = true) Long storageId) {
         return new Resource<>(categoryService.getCategoriesWithItemsTree(storageId));
     }

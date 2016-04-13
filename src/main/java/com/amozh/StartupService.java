@@ -4,10 +4,14 @@ import com.amozh.category.Category;
 import com.amozh.category.CategoryContentType;
 import com.amozh.category.CategoryRepository;
 import com.amozh.item.*;
-import com.amozh.operation.StockOperation;
-import com.amozh.operation.StockOperationItem;
+import com.amozh.item.model.Ingredient;
+import com.amozh.item.model.Product;
+import com.amozh.item.model.Unit;
+import com.amozh.operation.model.StockOperation;
+import com.amozh.operation.model.StockOperationItem;
 import com.amozh.operation.StockOperationRepository;
-import com.amozh.operation.StockOperationType;
+import com.amozh.operation.model.impl.HoldOperation;
+import com.amozh.operation.model.impl.InOperation;
 import com.amozh.storage.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -148,39 +152,50 @@ public class StartupService {
 
         //=========================================
 
-        StockOperation stockOperation = new StockOperation();
+        StockOperation inOperation = new InOperation();
 
         StockOperationItem itemSugar = new StockOperationItem();
         itemSugar.setItem(ingrSugar);
         itemSugar.setAmount(new BigDecimal(35.555));
         itemSugar.setPrice(new BigDecimal(50));
-        itemSugar.setOperation(stockOperation);
+        itemSugar.setOperation(inOperation);
 
         StockOperationItem itemApple = new StockOperationItem();
         itemApple.setItem(ingrApple);
         itemApple.setAmount(new BigDecimal(5));
         itemApple.setPrice(new BigDecimal(17));
-        itemApple.setOperation(stockOperation);
+        itemApple.setOperation(inOperation);
 
-        stockOperation.setDateTimePerformed(new Date());
-        stockOperation.setType(StockOperationType.IN);
-        stockOperation.addItem(itemSugar);
-        stockOperation.addItem(itemApple);
-        stockOperationRepository.save(stockOperation);
+        inOperation.setDateTimePerformed(new Date());
+        inOperation.addItem(itemSugar);
+        inOperation.addItem(itemApple);
+        stockOperationRepository.save(inOperation);
+
+        StockOperation holdOperation = new HoldOperation();
+
+        StockOperationItem itemSugarHold = new StockOperationItem();
+        itemSugarHold.setItem(ingrSugar);
+        itemSugarHold.setAmount(new BigDecimal(35.555));
+        itemSugarHold.setPrice(new BigDecimal(50));
+        itemSugarHold.setOperation(holdOperation);
+
+        holdOperation.setDateTimePerformed(new Date());
+        holdOperation.addItem(itemSugarHold);
+        stockOperationRepository.save(holdOperation);
 
         //=========================================
 
         StorageItem storageItemSugar = new StorageItem();
-        storageItemSugar.setItem(itemSugar.getItem());
+        storageItemSugar.setItem(ingrSugar);
         storageItemSugar.setStorage(storage1);
-        storageItemSugar.setAmount(itemSugar.getAmount());
+        storageItemSugar.setAmount(new BigDecimal(33));
         storageItemSugar.setHold(new BigDecimal(72.456));
         storageItemRepository.save(storageItemSugar);
 
         StorageItem storageItemApple = new StorageItem();
-        storageItemApple.setItem(itemApple.getItem());
+        storageItemApple.setItem(ingrApple);
         storageItemApple.setStorage(storage1);
-        storageItemApple.setAmount(itemApple.getAmount());
+        storageItemApple.setAmount(new BigDecimal(77));
         storageItemRepository.save(storageItemApple);
 
         //========================================= NO OPEARTIONS

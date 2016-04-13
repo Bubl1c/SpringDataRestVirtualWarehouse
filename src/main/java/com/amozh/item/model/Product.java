@@ -1,8 +1,8 @@
-package com.amozh.item;
+package com.amozh.item.model;
 
 import com.amozh.category.Category;
-import com.amozh.item.Ingredient;
-import com.amozh.item.Item;
+import com.amozh.item.model.Ingredient;
+import com.amozh.item.model.Item;
 import lombok.Data;
 import org.hibernate.annotations.Where;
 import org.springframework.data.rest.core.annotation.RestResource;
