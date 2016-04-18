@@ -2,6 +2,7 @@ package com.amozh.operation.model.projection;
 
 import com.amozh.item.model.projection.MinimalPreviewProjection;
 import com.amozh.operation.model.StockOperationItem;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.math.BigDecimal;
@@ -14,7 +15,11 @@ public interface OperationsListItemProjection {
 
     OperationsListOperationProjection getOperation();
 
-    MinimalPreviewProjection getItem();
+    @Value("#{target.item.name}")
+    String getItemName();
+
+    @Value("#{target.item.id}")
+    String getItemId();
 
     BigDecimal getAmount();
 

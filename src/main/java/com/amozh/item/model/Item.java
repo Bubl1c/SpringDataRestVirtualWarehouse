@@ -1,9 +1,11 @@
 package com.amozh.item.model;
 
+import com.amozh.operation.model.StockOperationType;
+import com.amozh.operation.model.impl.HoldOperation;
+import com.amozh.operation.model.impl.InOperation;
 import com.amozh.storage.StorageItem;
 import com.amozh.category.Category;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import org.hibernate.annotations.DiscriminatorOptions;
 
@@ -20,6 +22,7 @@ import java.util.List;
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="type")
 @DiscriminatorOptions(force = true)
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public abstract class Item {
     @Id
     @GeneratedValue
@@ -35,7 +38,7 @@ public abstract class Item {
     @Column(columnDefinition = "bit default 0", nullable = false)
     protected boolean deleted;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     @JsonBackReference
     private Category category;

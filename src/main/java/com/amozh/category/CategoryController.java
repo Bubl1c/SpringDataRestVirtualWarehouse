@@ -18,7 +18,7 @@ import java.util.Map;
  * Created by Andrii Mozharovskyi on 11.04.2016.
  */
 @RepositoryRestController
-@RequestMapping(Api.CONTEXT + "/" + Api.RES_CATEGORIES)
+@RequestMapping(Api.CONTEXT + "/" + Api.RES_COLLECTION_CATEGORIES)
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class CategoryController {
 

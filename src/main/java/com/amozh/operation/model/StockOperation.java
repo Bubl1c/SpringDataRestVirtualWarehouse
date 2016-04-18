@@ -1,12 +1,15 @@
 package com.amozh.operation.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.amozh.operation.model.impl.HoldOperation;
+import com.amozh.operation.model.impl.InOperation;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -14,9 +17,18 @@ import java.util.List;
  * Created by Andrii Mozharovskyi on 05.04.2016.
  */
 @Entity
-@Table(name="mb_stock_operation")
+//@Table(name="mb_stock_operation")
 @Data
+@NoArgsConstructor
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = InOperation.class, name = StockOperationType.IN_OPERATION_NAME),
+        @JsonSubTypes.Type(value = HoldOperation.class, name = StockOperationType.HOLD_OPERATION_NAME) })
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public abstract class StockOperation {
     @Id
 //    @GenericGenerator(name = "uuid2", strategy = "uuid2")
@@ -30,27 +42,24 @@ public abstract class StockOperation {
     private String description;
 
     @Transient
-    @JsonView(StockOperationItem.OperationsList.class)
     private StockOperationType type;
 
     @OneToMany(mappedBy = "operation", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<StockOperationItem> items = new ArrayList<>();
+    private Collection<StockOperationItem> items = new ArrayList<>();
 
     private Date dateTimeCreated = new Date();
 
+    @Column(nullable = false)
     private Date dateTimePerformed;
 
     public void addItem(StockOperationItem item) {
         items.add(item);
     }
 
-    /**
-     * Type field value set in subclasses and should not be modified from outside
-     * @param type
-     */
-    protected void setType(StockOperationType type) {
-        this.type = type;
+    public void setItems(Collection<StockOperationItem> items) {
+        this.items = items != null ? items : new ArrayList<>();
     }
+
+    public abstract StockOperationType getType();
 
 }

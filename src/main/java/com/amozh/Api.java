@@ -3,11 +3,23 @@ package com.amozh;
 /**
  * Created by Andrii Mozharovskyi on 11.04.2016.
  */
-public interface Api {
-    String CONTEXT = "api_v1";
+public final class Api {
 
-    //Resources mappings
-    String RES_STOCK_OPERATIONS = "operations";
-    String RES_CATEGORIES = "categories";
-    String RES_STOCK_OPERATION_ITEMS = "opitems";
+    private Api() {
+    }
+
+    public static final String CONTEXT = "api_v1";
+
+    /* Resources mappings */
+
+    public static final String RES_COLLECTION_STOCK_OPERATIONS = "operations";
+    public static final String RES_SINGLE_STOCK_OPERATION = "operation";
+
+    public static final String RES_COLLECTION_CATEGORIES = "categories";
+    public static final String RES_SINGLE_CATEGORY = "category";
+
+    public static final String RES_COLLECTION_STOCK_OPERATION_ITEMS = "opitems";
+    public static final String RES_SINGLE_STOCK_OPERATION_ITEM = "opitems";
+
+    /* Resources mappings END */
 }

@@ -10,7 +10,7 @@ import java.util.Collection;
 /**
  * Created by Andrii Mozharovskyi on 07.04.2016.
  */
-@RepositoryRestResource(path = Api.RES_CATEGORIES)
+@RepositoryRestResource(path = Api.RES_COLLECTION_CATEGORIES)
 public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     @Query("SELECT c FROM Category c LEFT JOIN FETCH c.parent WHERE c.contentType = com.amozh.category.CategoryContentType.I")

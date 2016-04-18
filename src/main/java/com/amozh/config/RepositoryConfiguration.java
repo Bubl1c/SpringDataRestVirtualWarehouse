@@ -15,6 +15,11 @@ public class RepositoryConfiguration extends RepositoryRestMvcConfiguration {
     public RepositoryRestConfiguration config(){
         RepositoryRestConfiguration config = super.config();
         config.setBasePath(Api.CONTEXT);
+
+//        config.setPageParamName("p")
+//                .setLimitParamName("l")
+//                .setSortParamName("q");
+
         return config;
     }
 }

@@ -1,9 +1,11 @@
 package com.amozh.operation.model;
 
+import com.amozh.TestOuter;
 import com.amozh.item.model.Item;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,6 +17,8 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="mb_stock_operation_item")
 @Data
+@NoArgsConstructor
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class StockOperationItem {
     @Id
 //    @GenericGenerator(name = "uuid2", strategy = "uuid2")
@@ -28,7 +32,6 @@ public class StockOperationItem {
     @ManyToOne(cascade = CascadeType.ALL)
 //    @JoinColumn(name = "operation_id", columnDefinition="uniqueidentifier")
     @JoinColumn(name = "operation_id")
-    @JsonBackReference
     private StockOperation operation;
 
     @ManyToOne
@@ -37,7 +40,6 @@ public class StockOperationItem {
 
     private BigDecimal amount;
 
-    @JsonView(OperationsList.class)
     private BigDecimal price;
 
     private BigDecimal amountAfter;

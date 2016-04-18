@@ -179,8 +179,9 @@ public class StartupService {
         itemSugarHold.setPrice(new BigDecimal(50));
         itemSugarHold.setOperation(holdOperation);
 
-        holdOperation.setDateTimePerformed(new Date());
+        holdOperation.setDateTimePerformed(new Date(100000));
         holdOperation.addItem(itemSugarHold);
+
         stockOperationRepository.save(holdOperation);
 
         //=========================================
