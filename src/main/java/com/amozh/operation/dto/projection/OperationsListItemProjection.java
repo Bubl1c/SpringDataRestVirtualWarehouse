@@ -1,7 +1,6 @@
-package com.amozh.operation.model.projection;
+package com.amozh.operation.dto.projection;
 
-import com.amozh.item.model.projection.MinimalPreviewProjection;
-import com.amozh.operation.model.StockOperationItem;
+import com.amozh.operation.item.StockOperationItem;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.core.config.Projection;
 

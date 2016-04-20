@@ -1,26 +1,30 @@
 package com.amozh.operation.model;
 
+import com.amozh.operation.item.StockOperationItem;
 import com.amozh.operation.model.impl.HoldOperation;
 import com.amozh.operation.model.impl.InOperation;
+import com.amozh.storage.Storage;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DiscriminatorOptions;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by Andrii Mozharovskyi on 05.04.2016.
  */
 @Entity
-//@Table(name="mb_stock_operation")
+@Table(name="mb_stock_operation")
 @Data
 @NoArgsConstructor
-@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="clazzId", discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorOptions(force = true)
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
@@ -42,10 +46,15 @@ public abstract class StockOperation {
     private String description;
 
     @Transient
+//    @Enumerated(value = EnumType.STRING)
     private StockOperationType type;
 
     @OneToMany(mappedBy = "operation", cascade = CascadeType.ALL)
     private Collection<StockOperationItem> items = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "storage_id")
+    private Storage storage;
 
     private Date dateTimeCreated = new Date();
 
@@ -61,5 +70,9 @@ public abstract class StockOperation {
     }
 
     public abstract StockOperationType getType();
+
+    private void setType(StockOperationType type) {
+        //Forbid to modify operation type
+    }
 
 }

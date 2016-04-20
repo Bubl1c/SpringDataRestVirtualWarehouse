@@ -1,10 +1,9 @@
-package com.amozh.operation.model.projection;
+package com.amozh.operation.dto.projection;
 
 import com.amozh.operation.model.StockOperation;
 import com.amozh.operation.model.StockOperationType;
 import org.springframework.data.rest.core.config.Projection;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 /**

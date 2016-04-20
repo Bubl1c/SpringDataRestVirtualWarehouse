@@ -1,7 +1,8 @@
-package com.amozh.operation.model;
+package com.amozh.operation.item;
 
 import com.amozh.TestOuter;
 import com.amozh.item.model.Item;
+import com.amozh.operation.model.StockOperation;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;

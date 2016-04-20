@@ -1,6 +1,5 @@
 package com.amozh;
 
-import com.amozh.operation.model.StockOperationItem;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

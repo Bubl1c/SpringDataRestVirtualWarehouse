@@ -1,4 +1,4 @@
-package com.amozh.operation.model.projection;
+package com.amozh.operation.dto.projection;
 
 import com.amozh.operation.model.StockOperation;
 import com.amozh.operation.model.StockOperationType;

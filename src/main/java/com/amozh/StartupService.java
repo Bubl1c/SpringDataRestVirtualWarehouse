@@ -8,7 +8,7 @@ import com.amozh.item.model.Ingredient;
 import com.amozh.item.model.Product;
 import com.amozh.item.model.Unit;
 import com.amozh.operation.model.StockOperation;
-import com.amozh.operation.model.StockOperationItem;
+import com.amozh.operation.item.StockOperationItem;
 import com.amozh.operation.StockOperationRepository;
 import com.amozh.operation.model.impl.HoldOperation;
 import com.amozh.operation.model.impl.InOperation;
@@ -167,6 +167,7 @@ public class StartupService {
         itemApple.setOperation(inOperation);
 
         inOperation.setDateTimePerformed(new Date());
+        inOperation.setStorage(storage1);
         inOperation.addItem(itemSugar);
         inOperation.addItem(itemApple);
         stockOperationRepository.save(inOperation);
@@ -180,8 +181,8 @@ public class StartupService {
         itemSugarHold.setOperation(holdOperation);
 
         holdOperation.setDateTimePerformed(new Date(100000));
+        holdOperation.setStorage(storage1);
         holdOperation.addItem(itemSugarHold);
-
         stockOperationRepository.save(holdOperation);
 
         //=========================================
