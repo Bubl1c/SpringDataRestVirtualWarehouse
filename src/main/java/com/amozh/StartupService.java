@@ -13,6 +13,8 @@ import com.amozh.operation.StockOperationRepository;
 import com.amozh.operation.model.impl.HoldOperation;
 import com.amozh.operation.model.impl.InOperation;
 import com.amozh.storage.*;
+import com.amozh.supplier.Supplier;
+import com.amozh.supplier.SupplierRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +51,15 @@ public class StartupService {
     private final @NonNull
     CategoryRepository categoryRepository;
 
+    private final @NonNull
+    SupplierRepository supplierRepository;
+
     public void onStartup() {
+        Supplier supplier = new Supplier();
+        supplier.setName("Andrii Mozharovskyi");
+        supplier.setDescription("Best supplier ever!");
+        supplierRepository.save(supplier);
+
         Unit unitPt = new Unit();
         unitPt.setName("Parts");
         unitPt.setDescription("parts");

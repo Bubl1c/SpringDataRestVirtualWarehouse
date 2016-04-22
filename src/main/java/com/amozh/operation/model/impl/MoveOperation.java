@@ -14,20 +14,20 @@ import javax.persistence.*;
  */
 //@Entity
 //@Table(name = "move_operation")
-@Data
-@RestResource(rel = StockOperationType.MOVE_OPERATION_NAME, path = Api.RES_COLLECTION_STOCK_OPERATIONS)
-public class MoveOperation extends StockOperation {
-
-    @ManyToOne
-    @JoinColumn(name = "from_storage_id")
-    private Storage from;
-
-    @ManyToOne
-    @JoinColumn(name = "to_storage_id")
-    private Storage to;
-
-    @Override
-    public StockOperationType getType() {
-        return StockOperationType.MOVE;
-    }
-}
+//@Data
+//@RestResource(rel = StockOperationType.MOVE_OPERATION_NAME, path = Api.RES_COLLECTION_STOCK_OPERATIONS)
+//public class MoveOperation extends StockOperation {
+//
+//    @ManyToOne
+//    @JoinColumn(name = "from_storage_id")
+//    private Storage from;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "to_storage_id")
+//    private Storage to;
+//
+//    @Override
+//    public StockOperationType getType() {
+//        return StockOperationType.MOVE;
+//    }
+//}

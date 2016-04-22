@@ -11,14 +11,14 @@ import org.springframework.data.rest.core.annotation.RestResource;
  */
 //@Entity
 //@Table(name = "return_operation")
-@Data
-@RestResource(rel = StockOperationType.RETURN_OPERATION_NAME, path = Api.RES_COLLECTION_STOCK_OPERATIONS)
-public class ReturnOperation extends StockOperation {
-
-    private Long order;
-
-    @Override
-    public StockOperationType getType() {
-        return StockOperationType.RETURN;
-    }
-}
+//@Data
+//@RestResource(rel = StockOperationType.RETURN_OPERATION_NAME, path = Api.RES_COLLECTION_STOCK_OPERATIONS)
+//public class ReturnOperation extends StockOperation {
+//
+//    private Long order;
+//
+//    @Override
+//    public StockOperationType getType() {
+//        return StockOperationType.RETURN;
+//    }
+//}

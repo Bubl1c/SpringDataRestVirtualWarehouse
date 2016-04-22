@@ -11,11 +11,11 @@ import org.springframework.data.rest.core.annotation.RestResource;
  */
 //@Entity
 //@Table(name = "sale_operation")
-@Data
-@RestResource(rel = StockOperationType.SALE_OPERATION_NAME, path = Api.RES_COLLECTION_STOCK_OPERATIONS)
-public class SaleOperation extends StockOperation {
-    @Override
-    public StockOperationType getType() {
-        return StockOperationType.SALE;
-    }
-}
+//@Data
+//@RestResource(rel = StockOperationType.SALE_OPERATION_NAME, path = Api.RES_COLLECTION_STOCK_OPERATIONS)
+//public class SaleOperation extends StockOperation {
+//    @Override
+//    public StockOperationType getType() {
+//        return StockOperationType.SALE;
+//    }
+//}

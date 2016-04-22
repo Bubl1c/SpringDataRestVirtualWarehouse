@@ -28,7 +28,6 @@ public abstract class Item {
     @GeneratedValue
     private long id;
 
-
     protected String name;
 
     protected String description;
@@ -40,12 +39,8 @@ public abstract class Item {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    @JsonBackReference
+//    @JsonBackReference
     private Category category;
-
-    @OneToMany(mappedBy = "item")
-    @JsonManagedReference
-    private List<StorageItem> storageItems;
 
     public interface TestJsonView {}
 }

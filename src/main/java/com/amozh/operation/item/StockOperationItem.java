@@ -1,10 +1,10 @@
 package com.amozh.operation.item;
 
-import com.amozh.TestOuter;
 import com.amozh.item.model.Item;
 import com.amozh.operation.model.StockOperation;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -45,6 +45,11 @@ public class StockOperationItem {
 
     private BigDecimal amountAfter;
 
-    public interface OperationsList {}
+    public StockOperationItem(Item item, BigDecimal amount, BigDecimal price, BigDecimal amountAfter) {
+        this.item = item;
+        this.amount = amount;
+        this.price = price;
+        this.amountAfter = amountAfter;
+    }
 
 }

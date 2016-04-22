@@ -1,7 +1,9 @@
 package com.amozh.category;
 
 import com.amozh.item.model.Item;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import org.hibernate.annotations.Where;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name="mb_Category")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Category {
 
     @Id
@@ -53,10 +56,9 @@ public class Category {
     @JoinColumn(name = "parent_category_id")
     private Category parent;
 
-    @OneToMany(mappedBy = "category")
-    @OrderBy(value = "position DESC")
-    @Where(clause = "deleted = 0")
-    @JsonManagedReference
-    private List<Item> items;
+//    @OneToMany(mappedBy = "category")
+//    @OrderBy(value = "position DESC")
+//    @Where(clause = "deleted = 0")
+//    private List<Item> items;
 
 }

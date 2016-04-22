@@ -2,6 +2,8 @@ package com.amozh.storage;
 
 import com.amozh.item.model.Item;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,11 +25,11 @@ public class StorageItem {
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+//    @JsonBackReference
     private Storage storage;
 
     @ManyToOne
-    @JsonBackReference
+//    @JsonBackReference
     private Item item;
 
     private BigDecimal amount = BigDecimal.ZERO;

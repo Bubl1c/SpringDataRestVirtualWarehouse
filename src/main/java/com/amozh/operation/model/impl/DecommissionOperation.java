@@ -11,11 +11,11 @@ import org.springframework.data.rest.core.annotation.RestResource;
  */
 //@Entity
 //@Table(name = "decommission_operation")
-@Data
-@RestResource(rel = StockOperationType.DECOMMISSION_OPERATION_NAME, path = Api.RES_COLLECTION_STOCK_OPERATIONS)
-public class DecommissionOperation extends StockOperation {
-    @Override
-    public StockOperationType getType() {
-        return StockOperationType.DECOMMISSION;
-    }
-}
+//@Data
+//@RestResource(rel = StockOperationType.DECOMMISSION_OPERATION_NAME, path = Api.RES_COLLECTION_STOCK_OPERATIONS)
+//public class DecommissionOperation extends StockOperation {
+//    @Override
+//    public StockOperationType getType() {
+//        return StockOperationType.DECOMMISSION;
+//    }
+//}

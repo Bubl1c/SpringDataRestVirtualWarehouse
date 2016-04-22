@@ -13,13 +13,4 @@ import javax.transaction.Transactional;
  */
 @RepositoryRestResource(path = Api.RES_COLLECTION_STOCK_OPERATIONS)
 public interface StockOperationRepository extends PagingAndSortingRepository<StockOperation, String> {
-    @Override
-    @RestResource(exported = false)
-    @Transactional
-    <S extends StockOperation> S save(S entity);
-
-    @Override
-    @RestResource(exported = false)
-    @Transactional
-    <S extends StockOperation> Iterable<S> save(Iterable<S> entities);
 }

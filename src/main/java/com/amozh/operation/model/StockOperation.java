@@ -1,5 +1,6 @@
 package com.amozh.operation.model;
 
+import com.amozh.Const;
 import com.amozh.operation.item.StockOperationItem;
 import com.amozh.operation.model.impl.HoldOperation;
 import com.amozh.operation.model.impl.InOperation;
@@ -9,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DiscriminatorOptions;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,18 +22,10 @@ import java.util.Date;
  */
 @Entity
 @Table(name="mb_stock_operation")
+@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
 @Data
 @NoArgsConstructor
-@Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="clazzId", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorOptions(force = true)
-@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = InOperation.class, name = StockOperationType.IN_OPERATION_NAME),
-        @JsonSubTypes.Type(value = HoldOperation.class, name = StockOperationType.HOLD_OPERATION_NAME) })
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public abstract class StockOperation {
     @Id
@@ -43,10 +37,12 @@ public abstract class StockOperation {
 //    private UUID uuid;
     private String id;
 
+    @Column(length = 1000)
+    @Lob
     private String description;
 
     @Transient
-//    @Enumerated(value = EnumType.STRING)
+    @JsonProperty
     private StockOperationType type;
 
     @OneToMany(mappedBy = "operation", cascade = CascadeType.ALL)
@@ -56,8 +52,12 @@ public abstract class StockOperation {
     @JoinColumn(name = "storage_id")
     private Storage storage;
 
+    @JsonFormat(pattern = Const.DATE_TIME_PATTERN)
+    @DateTimeFormat(pattern = Const.DATE_TIME_PATTERN)
     private Date dateTimeCreated = new Date();
 
+    @JsonFormat(pattern = Const.DATE_TIME_PATTERN)
+    @DateTimeFormat(pattern = Const.DATE_TIME_PATTERN)
     @Column(nullable = false)
     private Date dateTimePerformed;
 

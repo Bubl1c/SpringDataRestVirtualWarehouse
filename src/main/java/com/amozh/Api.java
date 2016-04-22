@@ -21,5 +21,8 @@ public final class Api {
     public static final String RES_COLLECTION_STOCK_OPERATION_ITEMS = "opitems";
     public static final String RES_SINGLE_STOCK_OPERATION_ITEM = "opitems";
 
+    public static final String RES_COLLECTION_SUPPLIERS = "suppliers";
+    public static final String RES_SINGLE_SUPPLIER = "supplier";
+
     /* Resources mappings END */
 }

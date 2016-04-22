@@ -1,7 +1,11 @@
 package com.amozh.storage;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.databind.annotation.JsonValueInstantiator;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name="mb_Storage")
 @Data
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Storage {
     @Id
     @GeneratedValue
@@ -23,7 +28,4 @@ public class Storage {
 
     private String address;
 
-    @OneToMany(mappedBy = "storage")
-    @JsonManagedReference
-    private List<StorageItem> items;
 }
