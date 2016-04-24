@@ -22,16 +22,11 @@ import java.math.BigDecimal;
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class StockOperationItem {
     @Id
-//    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-//    @GeneratedValue(generator = "uuid2")
-//    @Column(columnDefinition="uniqueidentifier")
     @GeneratedValue(generator = "system-uuid", strategy = GenerationType.TABLE)
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-//    private UUID uuid;
     private String id;
 
     @ManyToOne
-//    @JoinColumn(name = "operation_id", columnDefinition="uniqueidentifier")
     @JoinColumn(name = "operation_id")
     private StockOperation operation;
 

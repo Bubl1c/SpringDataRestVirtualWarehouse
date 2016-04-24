@@ -31,12 +31,8 @@ import java.util.Date;
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public abstract class StockOperation {
     @Id
-//    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-//    @GeneratedValue(generator = "uuid2")
-//    @Column(columnDefinition="uniqueidentifier")
     @GeneratedValue(generator = "system-uuid", strategy = GenerationType.AUTO)
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
-//    private UUID uuid;
     private String id;
 
     @Size(max = 1000)
