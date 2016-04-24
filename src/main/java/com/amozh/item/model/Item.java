@@ -8,8 +8,13 @@ import com.amozh.category.Category;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
 import org.hibernate.annotations.DiscriminatorOptions;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -20,7 +25,7 @@ import java.util.List;
 @Table(name="mb_Product")
 @Data
 @Inheritance(strategy= InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type")
+@DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.INTEGER)
 @DiscriminatorOptions(force = true)
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public abstract class Item {
@@ -28,18 +33,21 @@ public abstract class Item {
     @GeneratedValue
     private long id;
 
+    @Size(max = 255)
     protected String name;
 
+    @Size(max = 255)
     protected String description;
 
+    @Min(0)
     protected BigDecimal price = new BigDecimal(0);
 
     @Column(columnDefinition = "bit default 0", nullable = false)
     protected boolean deleted;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @NotNull
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-//    @JsonBackReference
     private Category category;
 
     public interface TestJsonView {}

@@ -2,10 +2,12 @@ package com.amozh.storage;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * Created by Andrii Mozharovskyi on 07.04.2016.
  */
+@Validated
 @RepositoryRestResource(path = "storages")
 public interface StorageRepository extends CrudRepository<Storage, Long> {
 }

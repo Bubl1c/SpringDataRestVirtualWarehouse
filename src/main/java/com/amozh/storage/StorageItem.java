@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -24,15 +26,19 @@ public class StorageItem {
     @GeneratedValue
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-//    @JsonBackReference
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "storage_id")
     private Storage storage;
 
-    @ManyToOne
-//    @JsonBackReference
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "item_id")
     private Item item;
 
+    @NotNull
+    @Min(0)
     private BigDecimal amount = BigDecimal.ZERO;
 
+    @NotNull
+    @Min(0)
     private BigDecimal hold = BigDecimal.ZERO;
 }

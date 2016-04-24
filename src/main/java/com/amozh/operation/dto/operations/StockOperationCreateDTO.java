@@ -1,7 +1,7 @@
-package com.amozh.operation.dto;
+package com.amozh.operation.dto.operations;
 
 import com.amozh.Const;
-import com.amozh.operation.model.StockOperation;
+import com.amozh.operation.dto.StockOperationItemDTO;
 import com.amozh.operation.model.StockOperationType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -22,11 +21,11 @@ import java.util.Date;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = InOperationDTO.class, name = StockOperationType.IN_OPERATION_NAME),
-        @JsonSubTypes.Type(value = HoldOperationDTO.class, name = StockOperationType.HOLD_OPERATION_NAME) })
+        @JsonSubTypes.Type(value = InOperationCreateDTO.class, name = StockOperationType.IN_OPERATION_NAME),
+        @JsonSubTypes.Type(value = HoldOperationCreateDTO.class, name = StockOperationType.HOLD_OPERATION_NAME) })
 @Data
 @NoArgsConstructor
-public abstract class StockOperationDTO {
+public abstract class StockOperationCreateDTO {
 
     @NotNull
     @Size(max = 1000)

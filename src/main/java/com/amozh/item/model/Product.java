@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Developer on 18.09.2015.
  */
-@Entity @DiscriminatorValue("Product")
+@Entity @DiscriminatorValue("1")
 @Data
 public class Product extends Item {
 

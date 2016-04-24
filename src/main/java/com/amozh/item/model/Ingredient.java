@@ -5,20 +5,24 @@ import lombok.Data;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Andrii Mozharovskyi on 05.04.2016.
  */
-@Entity @DiscriminatorValue("Ingredient")
+@Entity @DiscriminatorValue("2")
 @Data
 public class Ingredient extends Item {
 
+    @Size(max = 10)
     @Column(length = 10)
     private String sku;
 
-    @ManyToOne
-    @JoinColumn(name = "unit_id")
-    private Unit units;
+    @NotNull
+    @Size(max = 10)
+    @Column(length = 10)
+    private String units;
 
     @Override
     @RestResource(rel = "ingredientCategory")

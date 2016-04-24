@@ -1,8 +1,10 @@
 package com.amozh.operation.dto;
 
+import com.amozh.Const;
 import com.amozh.operation.item.StockOperationItem;
 import com.amozh.operation.model.StockOperationType;
 import com.amozh.utils.DTORestResource;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,8 +33,10 @@ public class OperationsListCombinedDTO {
 
     private StockOperationType operationType;
 
+    @JsonFormat(pattern = Const.DATE_TIME_PATTERN)
     private Date operationDateTimeCreated;
 
+    @JsonFormat(pattern = Const.DATE_TIME_PATTERN)
     private Date operationDateTimePerformed;
 
     public OperationsListCombinedDTO(StockOperationItem item) {

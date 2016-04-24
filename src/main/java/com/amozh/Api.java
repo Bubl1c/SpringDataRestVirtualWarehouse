@@ -24,5 +24,8 @@ public final class Api {
     public static final String RES_COLLECTION_SUPPLIERS = "suppliers";
     public static final String RES_SINGLE_SUPPLIER = "supplier";
 
+    public static final String RES_COLLECTION_UNITS = "units";
+    public static final String RES_SINGLE_UNIT = "unit";
+
     /* Resources mappings END */
 }

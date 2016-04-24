@@ -55,10 +55,14 @@ public class StartupService {
     SupplierRepository supplierRepository;
 
     public void onStartup() {
-        Supplier supplier = new Supplier();
-        supplier.setName("Andrii Mozharovskyi");
+
+        Supplier supplier = new Supplier("Andrii Mozharovskyi");
         supplier.setDescription("Best supplier ever!");
         supplierRepository.save(supplier);
+
+        Supplier supplier2 = new Supplier("Anti monopoly");
+        supplier2.setDescription("Not so good!");
+        supplierRepository.save(new Supplier());
 
         Unit unitPt = new Unit();
         unitPt.setName("Parts");
@@ -114,40 +118,45 @@ public class StartupService {
         storage1.setType(StorageType.GENERAL);
         storageRepository.save(storage1);
 
+        Storage storage2 = new Storage();
+        storage2.setName("Storage 2");
+        storage2.setType(StorageType.INSIDE_BUSINESS);
+        storageRepository.save(storage2);
+
         //=========================================
 
         Ingredient ingrApple = new Ingredient();
         ingrApple.setName("Apple");
         ingrApple.setSku("Ap");
-        ingrApple.setUnits(unitKg);
+        ingrApple.setUnits(unitKg.getName());
         ingrApple.setCategory(catFruits);
         itemRepository.save(ingrApple);
 
         Ingredient ingrOrange = new Ingredient();
         ingrOrange.setName("Orange");
         ingrOrange.setSku("Or");
-        ingrOrange.setUnits(unitKg);
+        ingrOrange.setUnits(unitKg.getName());
         ingrOrange.setCategory(catCitrus);
         itemRepository.save(ingrOrange);
 
         Ingredient ingrGrape = new Ingredient();
         ingrGrape.setName("Grape");
         ingrGrape.setSku("Gr");
-        ingrGrape.setUnits(unitKg);
+        ingrGrape.setUnits(unitKg.getName());
         ingrGrape.setCategory(catCitrus);
         itemRepository.save(ingrGrape);
 
         Ingredient ingrSugar = new Ingredient();
         ingrSugar.setName("Sugar");
         ingrSugar.setSku("S");
-        ingrSugar.setUnits(unitKg);
+        ingrSugar.setUnits(unitKg.getName());
         ingrSugar.setCategory(catGrocery);
         itemRepository.save(ingrSugar);
 
         Ingredient ingrSalt = new Ingredient();
         ingrSalt.setName("Salt");
         ingrSalt.setSku("Salt");
-        ingrSalt.setUnits(unitKg);
+        ingrSalt.setUnits(unitKg.getName());
         ingrSalt.setCategory(catGrocery);
         itemRepository.save(ingrSalt);
 
@@ -162,36 +171,37 @@ public class StartupService {
 
         //=========================================
 
-        StockOperation inOperation = new InOperation();
+        InOperation inOperation = new InOperation();
 
         StockOperationItem itemSugar = new StockOperationItem();
         itemSugar.setItem(ingrSugar);
-        itemSugar.setAmount(new BigDecimal(35.555));
-        itemSugar.setPrice(new BigDecimal(50));
+        itemSugar.setAmount(BigDecimal.valueOf(35.555));
+                itemSugar.setPrice(BigDecimal.valueOf(50));
         itemSugar.setOperation(inOperation);
 
         StockOperationItem itemApple = new StockOperationItem();
         itemApple.setItem(ingrApple);
-        itemApple.setAmount(new BigDecimal(5));
-        itemApple.setPrice(new BigDecimal(17));
+        itemApple.setAmount(BigDecimal.valueOf(5));
+        itemApple.setPrice(BigDecimal.valueOf(17));
         itemApple.setOperation(inOperation);
 
         inOperation.setDateTimePerformed(new Date());
         inOperation.setStorage(storage1);
         inOperation.addItem(itemSugar);
         inOperation.addItem(itemApple);
+        inOperation.setSupplier(supplier.getName());
         stockOperationRepository.save(inOperation);
 
         StockOperation holdOperation = new HoldOperation();
 
         StockOperationItem itemSugarHold = new StockOperationItem();
         itemSugarHold.setItem(ingrSugar);
-        itemSugarHold.setAmount(new BigDecimal(35.555));
-        itemSugarHold.setPrice(new BigDecimal(50));
+        itemSugarHold.setAmount(BigDecimal.valueOf(35.55));
+        itemSugarHold.setPrice(BigDecimal.valueOf(50));
         itemSugarHold.setOperation(holdOperation);
 
         holdOperation.setDateTimePerformed(new Date(100000));
-        holdOperation.setStorage(storage1);
+        holdOperation.setStorage(storage2);
         holdOperation.addItem(itemSugarHold);
         stockOperationRepository.save(holdOperation);
 
@@ -199,18 +209,18 @@ public class StartupService {
 
         StorageItem storageItemSugar = new StorageItem();
         storageItemSugar.setItem(ingrSugar);
-        storageItemSugar.setStorage(storage1);
-        storageItemSugar.setAmount(new BigDecimal(33));
-        storageItemSugar.setHold(new BigDecimal(72.456));
+        storageItemSugar.setStorage(storage2);
+        storageItemSugar.setAmount(BigDecimal.valueOf(33));
+        storageItemSugar.setHold(BigDecimal.valueOf(72.456));
         storageItemRepository.save(storageItemSugar);
 
         StorageItem storageItemApple = new StorageItem();
         storageItemApple.setItem(ingrApple);
         storageItemApple.setStorage(storage1);
-        storageItemApple.setAmount(new BigDecimal(77));
+        storageItemApple.setAmount(BigDecimal.valueOf(77));
         storageItemRepository.save(storageItemApple);
 
-        //========================================= NO OPEARTIONS
+        //========================================= NO OPERATIONS
 
         StorageItem storageItemSalt = new StorageItem();
         storageItemSalt.setItem(ingrSalt);
@@ -222,15 +232,15 @@ public class StartupService {
         StorageItem storageItemOrange = new StorageItem();
         storageItemOrange.setItem(ingrOrange);
         storageItemOrange.setStorage(storage1);
-        storageItemOrange.setAmount(new BigDecimal(14));
-        storageItemOrange.setHold(new BigDecimal(3));
+        storageItemOrange.setAmount(BigDecimal.valueOf(14));
+        storageItemOrange.setHold(BigDecimal.valueOf(3));
         storageItemRepository.save(storageItemOrange);
 
         StorageItem storageItemGrape = new StorageItem();
         storageItemGrape.setItem(ingrGrape);
         storageItemGrape.setStorage(storage1);
-        storageItemGrape.setAmount(new BigDecimal(149));
-        storageItemGrape.setHold(new BigDecimal(33));
+        storageItemGrape.setAmount(BigDecimal.valueOf(149));
+        storageItemGrape.setHold(BigDecimal.valueOf(33));
         storageItemRepository.save(storageItemGrape);
 
     }

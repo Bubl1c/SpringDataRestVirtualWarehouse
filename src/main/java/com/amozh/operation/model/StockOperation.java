@@ -13,6 +13,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -32,11 +34,12 @@ public abstract class StockOperation {
 //    @GenericGenerator(name = "uuid2", strategy = "uuid2")
 //    @GeneratedValue(generator = "uuid2")
 //    @Column(columnDefinition="uniqueidentifier")
-    @GeneratedValue(generator = "system-uuid", strategy = GenerationType.TABLE)
+    @GeneratedValue(generator = "system-uuid", strategy = GenerationType.AUTO)
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
 //    private UUID uuid;
     private String id;
 
+    @Size(max = 1000)
     @Column(length = 1000)
     @Lob
     private String description;
@@ -45,17 +48,20 @@ public abstract class StockOperation {
     @JsonProperty
     private StockOperationType type;
 
-    @OneToMany(mappedBy = "operation", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "operation", cascade = CascadeType.PERSIST)
     private Collection<StockOperationItem> items = new ArrayList<>();
 
-    @OneToOne
+    @NotNull
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "storage_id")
     private Storage storage;
 
+    @NotNull
     @JsonFormat(pattern = Const.DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = Const.DATE_TIME_PATTERN)
     private Date dateTimeCreated = new Date();
 
+    @NotNull
     @JsonFormat(pattern = Const.DATE_TIME_PATTERN)
     @DateTimeFormat(pattern = Const.DATE_TIME_PATTERN)
     @Column(nullable = false)

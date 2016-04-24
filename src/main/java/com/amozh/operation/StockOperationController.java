@@ -2,10 +2,8 @@ package com.amozh.operation;
 
 import com.amozh.Api;
 import com.amozh.Const;
-import com.amozh.TestDTo;
-import com.amozh.operation.dto.InOperationDTO;
 import com.amozh.operation.dto.OperationsListCombinedDTO;
-import com.amozh.operation.dto.StockOperationDTO;
+import com.amozh.operation.dto.operations.InOperationCreateDTO;
 import com.amozh.operation.item.StockOperationItem;
 import com.amozh.operation.model.StockOperation;
 import com.amozh.operation.model.StockOperationType;
@@ -44,15 +42,9 @@ public class StockOperationController {
 
     @RequestMapping(value = "", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> save(@Valid @RequestBody InOperationDTO stockOperationDTO) {
+    public ResponseEntity<String> save(@Valid @RequestBody InOperationCreateDTO stockOperationDTO) {
         StockOperation stockOperation = stockOperationService.save(stockOperationDTO);
         return ResponseEntity.ok(stockOperation.getId());
-    }
-
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity update(@Valid @RequestBody TestDTo dto) {
-        return ResponseEntity.ok(dto);
     }
 
     @RestResource(rel = "operations")
@@ -76,6 +68,6 @@ public class StockOperationController {
     @ResponseBody
     public String handleMethodArgumentNotValidException(
             MethodArgumentNotValidException error) {
-        return "Bad request: " + error.getMessage();
+        return error.getMessage();
     }
 }

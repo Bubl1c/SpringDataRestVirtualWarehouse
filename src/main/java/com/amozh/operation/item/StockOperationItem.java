@@ -30,7 +30,7 @@ public class StockOperationItem {
 //    private UUID uuid;
     private String id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
 //    @JoinColumn(name = "operation_id", columnDefinition="uniqueidentifier")
     @JoinColumn(name = "operation_id")
     private StockOperation operation;

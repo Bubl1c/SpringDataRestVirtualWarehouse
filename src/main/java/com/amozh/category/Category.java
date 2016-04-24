@@ -2,13 +2,12 @@ package com.amozh.category;
 
 import com.amozh.item.model.Item;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +15,10 @@ import java.util.List;
  * Created by Developer on 18.09.2015.
  */
 
-@Data
 @Entity
 @Table(name="mb_Category")
+@Data
+@NoArgsConstructor
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class Category {
 
@@ -48,17 +48,13 @@ public class Category {
     @Column(columnDefinition = "bit default 0", nullable = false)
     private boolean deleted;
 
-    private BigDecimal stock = new BigDecimal(0);
-
-    private BigDecimal holdStock = new BigDecimal(0);
-
     @OneToOne
     @JoinColumn(name = "parent_category_id")
     private Category parent;
 
-//    @OneToMany(mappedBy = "category")
-//    @OrderBy(value = "position DESC")
-//    @Where(clause = "deleted = 0")
-//    private List<Item> items;
+    @OneToMany(mappedBy = "category")
+    @OrderBy(value = "position DESC")
+    @Where(clause = "deleted = 0")
+    private List<Item> items;
 
 }
