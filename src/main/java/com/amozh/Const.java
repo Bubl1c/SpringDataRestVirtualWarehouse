@@ -10,5 +10,5 @@ public final class Const {
 
     public static final String DATE_PATTERN = "yyyy-MM-dd";
     public static final String TIME_PATTERN = "HH:mm:ss.SSS";
-    public static final String DATE_TIME_PATTERN = DATE_PATTERN + "T" + TIME_PATTERN;
+    public static final String DATE_TIME_PATTERN = DATE_PATTERN + "'T'" + TIME_PATTERN;
 }

@@ -2,7 +2,6 @@ package com.amozh.operation.item;
 
 import com.amozh.Api;
 import com.amozh.operation.model.StockOperation;
-import com.sun.istack.internal.Nullable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -44,9 +43,9 @@ public interface StockOperationItemRepository extends PagingAndSortingRepository
             searchAllWithOperationAndItemQueryConditions)
     Page<StockOperationItem> searchAllWithOperationAndItem(
             @NotNull @Param("storageId") Long storageId,
-            @Nullable @Param("itemId") Long itemId,
-            @Nullable @Param("fromDate") Date fromDate,
-            @Nullable @Param("toDate") Date toDate,
+            @Param("itemId") Long itemId,
+            @Param("fromDate") Date fromDate,
+            @Param("toDate") Date toDate,
             @NotNull @Param("operationTypes") Iterable<Class<? extends StockOperation>> operationTypes,
             Pageable pageable);
 

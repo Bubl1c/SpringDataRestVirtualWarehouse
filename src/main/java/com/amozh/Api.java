@@ -27,5 +27,8 @@ public final class Api {
     public static final String RES_COLLECTION_UNITS = "units";
     public static final String RES_SINGLE_UNIT = "unit";
 
+    public static final String RES_COLLECTION_STORAGES = "storages";
+    public static final String RES_SINGLE_STORAGE = "storage";
+
     /* Resources mappings END */
 }

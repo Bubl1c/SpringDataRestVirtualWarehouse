@@ -52,7 +52,7 @@ public class CategoryService {
             CategoryTreeDTO categoryTreeDTO = categories.get(itemCategory.getId());
             if(categoryTreeDTO != null) {
                 categoryTreeDTO.addItem(
-                        new CategoryTreeItemDTO(item.getId(), item.getName(), si.getAmount(), si.getHold()));
+                        new CategoryTreeItemDTO(si.getId(), item.getName(), si.getAmount(), si.getHold()));
             }
         });
     }
