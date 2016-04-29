@@ -7,6 +7,7 @@ import com.amozh.operation.model.impl.InOperation;
 import com.amozh.storage.Storage;
 import com.fasterxml.jackson.annotation.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DiscriminatorOptions;
 import org.hibernate.annotations.GenericGenerator;
@@ -28,6 +29,7 @@ import java.util.Date;
 @DiscriminatorColumn(name="type", discriminatorType = DiscriminatorType.STRING)
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public abstract class StockOperation {
     @Id
@@ -44,7 +46,7 @@ public abstract class StockOperation {
     @JsonProperty
     private StockOperationType type;
 
-    @OneToMany(mappedBy = "operation", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "operation", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<StockOperationItem> items = new ArrayList<>();
 
     @NotNull
@@ -68,7 +70,12 @@ public abstract class StockOperation {
     }
 
     public void setItems(Collection<StockOperationItem> items) {
-        this.items = items != null ? items : new ArrayList<>();
+        if (items == null) {
+            this.items = new ArrayList<>();
+        } else {
+            this.items.clear();
+            this.items.addAll(items);
+        }
     }
 
     public abstract StockOperationType getType();

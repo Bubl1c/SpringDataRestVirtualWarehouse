@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -19,6 +20,7 @@ import java.math.BigDecimal;
 @Table(name="mb_stock_operation_item")
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class StockOperationItem {
     @Id
