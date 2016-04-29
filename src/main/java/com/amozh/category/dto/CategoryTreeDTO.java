@@ -14,14 +14,14 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 public class CategoryTreeDTO {
-    private long id;
+    private Long id;
     @JsonProperty("label")
     private String name;
     private CategoryContentType contentType;
-    private long parentId;
+    private Long parentId;
     private Collection<CategoryTreeItemDTO> items = new ArrayList<>();
 
-    public CategoryTreeDTO(long id, String name, CategoryContentType contentType, long parentId) {
+    public CategoryTreeDTO(long id, String name, CategoryContentType contentType, Long parentId) {
         this.id = id;
         this.name = name;
         this.contentType = contentType;

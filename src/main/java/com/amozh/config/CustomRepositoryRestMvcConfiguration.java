@@ -1,6 +1,8 @@
 package com.amozh.config;
 
 import com.amozh.Api;
+import com.amozh.category.Category;
+import com.amozh.operation.item.StockOperationItem;
 import com.amozh.storage.Storage;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -17,7 +19,7 @@ public class CustomRepositoryRestMvcConfiguration extends RepositoryRestMvcConfi
         RepositoryRestConfiguration config = super.config();
         config.setBasePath(Api.CONTEXT);
 
-        config.exposeIdsFor(Storage.class);
+        config.exposeIdsFor(Storage.class, StockOperationItem.class, Category.class);
 
         return config;
     }

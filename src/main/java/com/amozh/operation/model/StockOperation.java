@@ -44,11 +44,11 @@ public abstract class StockOperation {
     @JsonProperty
     private StockOperationType type;
 
-    @OneToMany(mappedBy = "operation", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "operation", cascade = CascadeType.ALL)
     private Collection<StockOperationItem> items = new ArrayList<>();
 
     @NotNull
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "storage_id")
     private Storage storage;
 

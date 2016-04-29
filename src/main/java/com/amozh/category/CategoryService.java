@@ -65,7 +65,7 @@ public class CategoryService {
                                 c.getId(),
                                 c.getName(),
                                 c.getContentType(),
-                                c.getParent() != null ? c.getParent().getId() : -1)
+                                c.getParent() != null ? c.getParent().getId() : null)
                 ));
     }
 
